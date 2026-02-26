@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
@@ -15,7 +17,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
-        {children}
+        <div className="relative flex-1">
+          <Image
+            src="/WaveBG.png"
+            alt=""
+            width={1440}
+            height={320}
+            className="absolute top-0 left-0 w-full h-auto"
+            priority
+          />
+          <div className="relative">
+            {children}
+          </div>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   )
