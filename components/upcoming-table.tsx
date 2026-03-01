@@ -28,7 +28,7 @@ const bookings = [
     timeStart: "09:00 AM",
     timeEnd: "10:00 AM",
     type: "Appointment",
-    status: "Confirmed",
+    status: "Completed",
   },
   {
     id: "BK002",
@@ -48,7 +48,7 @@ const bookings = [
     timeStart: "02:00 PM",
     timeEnd: "03:00 PM",
     type: "Appointment",
-    status: "Confirmed",
+    status: "Completed",
   },
   {
     id: "BK004",
@@ -68,7 +68,7 @@ const bookings = [
     timeStart: "03:30 PM",
     timeEnd: "04:30 PM",
     type: "Appointment",
-    status: "Cancelled",
+    status: "Canceled",
   },
 ].sort((a, b) => {
   const dateTimeA = new Date(`${a.date} ${a.timeStart}`)
@@ -77,9 +77,9 @@ const bookings = [
 })
 
 const statusClass: Record<string, string> = {
-  Confirmed: "border-green-500 text-green-600",
+  Completed: "border-green-500 text-green-600",
   Pending: "border-yellow-500 text-yellow-600",
-  Cancelled: "border-red-500 text-red-600",
+  Canceled: "border-red-500 text-red-600",
 }
 
 export function UpcomingTable() {
