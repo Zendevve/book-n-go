@@ -1,0 +1,81 @@
+"use client"
+
+import { useRef, useState } from "react"
+import { Camera } from "lucide-react"
+import { IconPhoto } from "@tabler/icons-react"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Button } from "./ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+
+export const ProfileCard = () => {
+  const [preview, setPreview] = useState<string | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setPreview(URL.createObjectURL(file))
+  }
+
+  const handleRemove = () => {
+    setPreview(null)
+    if (inputRef.current) inputRef.current.value = ""
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <IconPhoto className="size-4 text-blue-500" />
+          <h1 className="bg-gradient-to-r from-[#3F51B5] via-[#3A79C3] to-[#329A9A] bg-clip-text text-base font-bold text-transparent">
+            Profile Picture
+          </h1>
+        </CardTitle>
+        <CardDescription>Upload a photo to personalize your profile.</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-row items-center gap-6 py-6">
+        {/* Avatar */}
+        <div className="relative shrink-0">
+          <Avatar className="size-24">
+            <AvatarImage src={preview ?? undefined} />
+            <AvatarFallback className="text-2xl">BG</AvatarFallback>
+          </Avatar>
+          <button
+            onClick={() => inputRef.current?.click()}
+            className="absolute bottom-0 right-0 flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow hover:bg-primary/90"
+          >
+            <Camera className="size-4" />
+          </button>
+        </div>
+
+        {/* Right side */}
+        <div className="flex flex-col gap-1">
+          <h2 className="text-base font-semibold">Update your profile</h2>
+          <p className="text-sm text-muted-foreground">JPG, PNG or GIF. Max 2MB.</p>
+          <div className="mt-1 flex gap-2">
+            <Button variant="outline" size="sm" onClick={() => inputRef.current?.click()}>
+              Upload Photo
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleRemove}
+              disabled={!preview}
+              className={!preview ? "pointer-events-none opacity-0" : ""}
+            >
+              Remove
+            </Button>
+          </div>
+        </div>
+
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+      </CardContent>
+    </Card>
+  )
+}
