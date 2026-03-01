@@ -38,7 +38,7 @@ export const ProfileCard = () => {
         <div className="relative shrink-0">
           <Avatar className="size-24">
             <AvatarImage src={preview ?? undefined} />
-            <AvatarFallback className="text-2xl">U</AvatarFallback>
+            <AvatarFallback className="text-2xl">BG</AvatarFallback>
           </Avatar>
           <button
             onClick={() => inputRef.current?.click()}

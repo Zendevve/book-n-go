@@ -69,7 +69,7 @@ export const PersonalInformation = () => {
                     <FormItem>
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John" {...field} />
+                        <Input placeholder="Book" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -82,7 +82,7 @@ export const PersonalInformation = () => {
                     <FormItem>
                       <FormLabel>Middle Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Michael" {...field} />
+                        <Input placeholder="N" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -95,7 +95,7 @@ export const PersonalInformation = () => {
                     <FormItem>
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Doe" {...field} />
+                        <Input placeholder="Go" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -115,7 +115,7 @@ export const PersonalInformation = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john@example.com" {...field} />
+                        <Input type="email" placeholder="BookNGo@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
