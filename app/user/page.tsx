@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UserLandingPage = () => {
+export default function UserLandingPage() {
   return (
     <div>UserLandingPage</div>
   )

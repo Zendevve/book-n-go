@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const BookNowPage = () => {
+export default function BookNowPage() {
   return (
     <div>BookNowPage</div>
   )

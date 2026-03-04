@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UserProfilePage = () => {
+export default function UserProfilePage() {
   return (
     <div>UserProfilePage</div>
   )

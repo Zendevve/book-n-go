@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const HistoryPage = () => {
+export default function HistoryPage() {
   return (
     <div>HistoryPage</div>
   )
