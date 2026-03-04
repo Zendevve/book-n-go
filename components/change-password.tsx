@@ -3,10 +3,10 @@
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { IconLock } from "@tabler/icons-react"
-import { Button } from "./button"
-import { Input } from "./input"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./form"
+} from "./ui/form"
 
 const schema = z
   .object({

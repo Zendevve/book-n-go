@@ -5,21 +5,35 @@ import { Camera } from "lucide-react"
 import { IconPhoto } from "@tabler/icons-react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { Button } from "./ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 export const ProfileCard = () => {
   const [preview, setPreview] = useState<string | null>(null)
+  const [isDirty, setIsDirty] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     setPreview(URL.createObjectURL(file))
+    setIsDirty(true)
   }
 
   const handleRemove = () => {
     setPreview(null)
     if (inputRef.current) inputRef.current.value = ""
+    setIsDirty(true)
+  }
+
+  const handleCancel = () => {
+    setPreview(null)
+    if (inputRef.current) inputRef.current.value = ""
+    setIsDirty(false)
+  }
+
+  const handleSave = () => {
+    // TODO: persist changes
+    setIsDirty(false)
   }
 
   return (
@@ -33,7 +47,7 @@ export const ProfileCard = () => {
         </CardTitle>
         <CardDescription>Upload a photo to personalize your profile.</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-row items-center gap-6 py-6">
+      <CardContent className="flex flex-row items-center gap-6">
         {/* Avatar */}
         <div className="relative shrink-0">
           <Avatar className="size-24">
@@ -76,6 +90,25 @@ export const ProfileCard = () => {
           onChange={handleFileChange}
         />
       </CardContent>
+      <CardFooter className="flex justify-end gap-2">
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={handleCancel}
+          disabled={!isDirty}
+          className={!isDirty ? "pointer-events-none opacity-0" : ""}
+        >
+          Cancel Changes
+        </Button>
+        <Button
+          type="button"
+          onClick={handleSave}
+          disabled={!isDirty}
+          className={!isDirty ? "pointer-events-none opacity-0" : ""}
+        >
+          Save
+        </Button>
+      </CardFooter>
     </Card>
   )
 }
