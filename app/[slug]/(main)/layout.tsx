@@ -1,10 +1,19 @@
+import React from "react"
 import Image from "next/image"
 
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { UserSidebar } from "@/components/user-sidebar"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function MainLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+
   return (
     <SidebarProvider
       style={
@@ -14,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         } as React.CSSProperties
       }
     >
-      <UserSidebar variant="inset" />
+      <UserSidebar slug={slug} variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="relative flex-1">

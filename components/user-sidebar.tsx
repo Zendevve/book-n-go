@@ -26,37 +26,38 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const data = {
-  user: {
-    name: "Book N. Go",
-    email: "BookNGo@gmail.com",
-    avatar: "/BNGCircleTransparent.png",
-  },
-  navMain: [    
+const userData = {
+  name: "Book N. Go",
+  email: "BookNGo@gmail.com",
+  avatar: "/BNGCircleTransparent.png",
+}
+
+function getNavItems(slug: string) {
+  return [
     {
       title: "Book Now",
-      url: "/user/book-now",
+      url: `/${slug}/book-now`,
       icon: IconCalendarClock,
     },
     {
       title: "My Booking",
-      url: "/user/my-booking",
+      url: `/${slug}/my-booking`,
       icon: IconCalendarCheck,
     },
     {
       title: "History",
-      url: "/user/history",
+      url: `/${slug}/history`,
       icon: IconHistory,
     },
     {
       title: "Profile",
-      url: "/user/profile",
+      url: `/${slug}/profile`,
       icon: IconUser,
     },
-  ],
+  ]
 }
 
-export function UserSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function UserSidebar({ slug, ...props }: React.ComponentProps<typeof Sidebar> & { slug: string }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -83,10 +84,10 @@ export function UserSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={getNavItems(slug)} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
     </Sidebar>
   )
