@@ -1,11 +1,11 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { IconCalendar, IconCheck, IconInfoCircle, IconReceipt } from "@tabler/icons-react"
+import { IconCalendar, IconCheck, IconReceipt, IconTag } from "@tabler/icons-react"
 
 const steps = [
   { label: "Select Date & Time", description: "Choose your preferred slot", icon: IconCalendar },
-  { label: "Your Details", description: "Fill in your information", icon: IconInfoCircle },
-  { label: "Confirmation", description: "Review & confirm booking", icon: IconReceipt },
+  { label: "Service & Details", description: "Choose service & your info", icon: IconTag },
+  { label: "Review", description: "Review & confirm booking", icon: IconReceipt },
 ]
 
 interface BookingStepsProps {
@@ -46,7 +46,9 @@ export function BookingSteps({ current = 1 }: BookingStepsProps) {
                 <span
                   className={cn(
                     "text-xs font-semibold leading-tight",
-                    isActive || isCompleted ? "text-white" : "text-white/60"
+                    isActive || isCompleted
+                      ? "text-white"
+                      : "text-white/60"
                   )}
                 >
                   {step.label}

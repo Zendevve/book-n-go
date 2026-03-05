@@ -1,6 +1,7 @@
 import { WebsiteConfiguration } from "@/components/website-configuration"
 import { BusinessProfile } from "@/components/business-profile"
 import { ChangeTheme } from "@/components/change-theme"
+import { ServicesManager } from "@/components/services-manager"
 
 const SettingsPage = () => {
   return (
@@ -14,6 +15,9 @@ const SettingsPage = () => {
             <div className="flex min-w-[360px] flex-1 flex-col gap-4">
               <BusinessProfile />
               <ChangeTheme />
+            </div>
+            <div className="flex min-w-[360px] flex-1 flex-col [&>*]:flex-1">
+              <ServicesManager />
             </div>
           </div>
         </div>
