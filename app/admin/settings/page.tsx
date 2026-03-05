@@ -12,7 +12,7 @@ const SettingsPage = () => {
             <div className="flex min-w-[420px] flex-1 flex-col [&>*]:flex-1">
               <WebsiteConfiguration />
             </div>
-            <div className="flex min-w-[360px] flex-1 flex-col gap-4">
+            <div className="flex min-w-[360px] flex-1 flex-col gap-4 [&>*]:flex-1">
               <BusinessProfile />
               <ChangeTheme />
             </div>

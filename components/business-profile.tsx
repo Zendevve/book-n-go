@@ -41,7 +41,7 @@ export const BusinessProfile = () => {
   }
 
   return (
-    <Card>
+    <Card className="flex h-full flex-col">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <IconBuildingStore className="size-4 text-blue-500" />
@@ -51,7 +51,7 @@ export const BusinessProfile = () => {
         </CardTitle>
         <CardDescription>Upload your business profile to personalize your workspace.</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-6">
+      <CardContent className="flex flex-1 flex-col gap-6">
         <div className="flex items-center gap-4">
           {/* Avatar */}
           <div className="relative shrink-0">
