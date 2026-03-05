@@ -54,7 +54,7 @@ export const ChangeTheme = () => {
   }
 
   return (
-    <Card>
+    <Card className="flex h-full flex-col">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <IconPalette className="size-4 text-blue-500" />
@@ -67,8 +67,8 @@ export const ChangeTheme = () => {
         </p>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardContent className="flex flex-col gap-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-1 flex-col">
+          <CardContent className="flex flex-1 flex-col gap-6">
 
             {/* Theme Mode */}
             <FormField

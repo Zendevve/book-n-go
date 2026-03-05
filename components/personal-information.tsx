@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -15,18 +16,28 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form"
+import { getUserProfile, saveUserProfile } from "@/lib/user-profile"
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
   middleName: z.string().optional(),
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .regex(/^[+]?[\d\s\-(). ]{7,20}$/, "Invalid phone number"),
 })
 
 type FormValues = z.infer<typeof schema>
 
-export const PersonalInformation = () => {
+export const PersonalInformation = ({
+  onSubmit: onSubmitProp,
+  formId,
+}: {
+  onSubmit?: (values: FormValues) => void
+  formId?: string
+}) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -38,8 +49,15 @@ export const PersonalInformation = () => {
     },
   })
 
+  // Load saved profile into form on mount
+  React.useEffect(() => {
+    const profile = getUserProfile()
+    if (profile) form.reset(profile)
+  }, [form])
+
   const onSubmit = (values: FormValues) => {
-    console.log(values)
+    saveUserProfile(values)
+    onSubmitProp?.(values)
   }
 
   return (
@@ -52,16 +70,16 @@ export const PersonalInformation = () => {
           </h1>
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Update your personal information and email address.
+          Your contact details used for bookings.
         </p>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-1 flex-col">
+        <form id={formId} onSubmit={form.handleSubmit(onSubmit)} className="flex flex-1 flex-col">
           <CardContent className="flex flex-1 flex-col gap-6">
             {/* Full Name */}
             <div className="flex flex-col gap-3">
               <p className="text-sm font-semibold">Full Name</p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
                   name="firstName"
@@ -107,7 +125,7 @@ export const PersonalInformation = () => {
             {/* Contact Information */}
             <div className="flex flex-col gap-3">
               <p className="text-sm font-semibold">Contact Information</p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -137,24 +155,26 @@ export const PersonalInformation = () => {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end gap-2 pt-4">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => form.reset()}
-              disabled={!form.formState.isDirty}
-              className={!form.formState.isDirty ? "pointer-events-none opacity-0" : ""}
-            >
-              Cancel Changes
-            </Button>
-            <Button
-              type="submit"
-              disabled={!form.formState.isDirty}
-              className={!form.formState.isDirty ? "pointer-events-none opacity-0" : ""}
-            >
-              Save
-            </Button>
-          </CardFooter>
+          {!formId && (
+            <CardFooter className="flex justify-end gap-2 pt-4">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => form.reset()}
+                disabled={!form.formState.isDirty}
+                className={!form.formState.isDirty ? "pointer-events-none opacity-0" : ""}
+              >
+                Cancel Changes
+              </Button>
+              <Button
+                type="submit"
+                disabled={!form.formState.isDirty}
+                className={!form.formState.isDirty ? "pointer-events-none opacity-0" : ""}
+              >
+                Save
+              </Button>
+            </CardFooter>
+          )}
         </form>
       </Form>
     </Card>

@@ -1,11 +1,19 @@
+import React from "react"
 import Image from "next/image"
 import { cookies } from "next/headers"
 
-import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { UserSidebar } from "@/components/user-sidebar"
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default async function MainLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
   const cookieStore = await cookies()
   const sidebarState = cookieStore.get("sidebar_state")?.value
   const defaultOpen = sidebarState !== "false"
@@ -20,7 +28,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <UserSidebar slug={slug} variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="relative flex-1">
@@ -32,7 +40,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             className="absolute top-0 left-0 w-full h-auto"
             priority
           />
-          <div className="relative">
+          <div className="relative flex min-h-[calc(100vh-var(--header-height))] flex-col">
             {children}
           </div>
         </div>
