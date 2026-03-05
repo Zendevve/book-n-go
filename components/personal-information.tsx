@@ -79,7 +79,7 @@ export const PersonalInformation = ({
             {/* Full Name */}
             <div className="flex flex-col gap-3">
               <p className="text-sm font-semibold">Full Name</p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
                   name="firstName"
@@ -125,7 +125,7 @@ export const PersonalInformation = ({
             {/* Contact Information */}
             <div className="flex flex-col gap-3">
               <p className="text-sm font-semibold">Contact Information</p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
                   name="email"
