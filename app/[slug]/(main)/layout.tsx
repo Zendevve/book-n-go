@@ -35,7 +35,7 @@ export default async function MainLayout({
             className="absolute top-0 left-0 w-full h-auto"
             priority
           />
-          <div className="relative">
+          <div className="relative flex min-h-[calc(100vh-var(--header-height))] flex-col">
             {children}
           </div>
         </div>
