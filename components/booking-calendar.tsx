@@ -114,15 +114,17 @@ export function BookingCalendar({ onChange }: BookingCalendarProps) {
               selected={date}
               onSelect={handleDateSelect}
               captionLayout="dropdown"
-              disabled={(d) => d < today || isDateBooked(d)}
+              disabled={(d) => d < today}
               className="w-full flex-1 [--cell-size:--spacing(10)] [&_button[data-selected-single=true]]:bg-[#3A79C3] [&_button[data-selected-single=true]]:text-white [&_button[data-selected-single=true]]:hover:bg-[#3164a8]"
               classNames={{ root: "w-full" }}
               modifiers={{
                 booked: bookedDates,
+                available: (d) => d >= today && !isDateBooked(d),
               }}
               modifiersClassNames={{
-                booked: "[&_button]:!bg-red-100 [&_button]:!text-red-600 [&_button:hover]:!bg-red-200 [&_button]:cursor-not-allowed",
-                disabled: "!text-muted-foreground !opacity-40",
+                available: "[&_button]:bg-green-50 [&_button]:text-green-800 [&_button:hover]:bg-green-100",
+                booked: "[&_button]:!bg-red-100 [&_button]:!text-red-600 [&_button:hover]:!bg-red-200 [&_button]:cursor-not-allowed [&_button]:pointer-events-none",
+                disabled: "[&_button]:!bg-transparent !text-muted-foreground !opacity-40",
               }}
               formatters={{
                 formatMonthDropdown: (d) =>
@@ -131,15 +133,15 @@ export function BookingCalendar({ onChange }: BookingCalendarProps) {
             />
             <div className="flex items-center justify-center gap-4 pt-1 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <span className="size-3 rounded-sm bg-green-100 ring-1 ring-green-400" />
+                <span className="inline-block shrink-0 size-3 rounded-sm bg-green-100 ring-1 ring-green-400" />
                 Available
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="size-3 rounded-sm bg-red-100 ring-1 ring-red-400" />
+                <span className="inline-block shrink-0 size-3 rounded-sm bg-red-100 ring-1 ring-red-400" />
                 Fully Booked
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="size-3 rounded-sm bg-muted ring-1 ring-border" />
+                <span className="inline-block shrink-0 size-3 rounded-sm bg-muted ring-1 ring-border" />
                 Unavailable
               </span>
             </div>
@@ -208,15 +210,15 @@ export function BookingCalendar({ onChange }: BookingCalendarProps) {
               </div>
               <div className="flex flex-wrap items-center justify-center gap-4 pt-1 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <span className="size-3 rounded-sm bg-background ring-1 ring-border" />
+                  <span className="inline-block shrink-0 size-3 rounded-sm bg-background ring-1 ring-border" />
                   Available
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="size-3 rounded-sm bg-[#3A79C3] ring-1 ring-[#3A79C3]" />
+                  <span className="inline-block shrink-0 size-3 rounded-sm bg-[#3A79C3] ring-1 ring-[#3A79C3]" />
                   Selected
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="size-3 rounded-sm bg-muted ring-1 ring-border opacity-50" />
+                  <span className="inline-block shrink-0 size-3 rounded-sm bg-muted ring-1 ring-border opacity-50" />
                   Unavailable / Full
                 </span>
               </div>

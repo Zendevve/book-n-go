@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import { cookies } from "next/headers"
 
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
@@ -13,9 +14,13 @@ export default async function MainLayout({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+  const cookieStore = await cookies()
+  const sidebarState = cookieStore.get("sidebar_state")?.value
+  const defaultOpen = sidebarState !== "false"
 
   return (
     <SidebarProvider
+      defaultOpen={defaultOpen}
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",
