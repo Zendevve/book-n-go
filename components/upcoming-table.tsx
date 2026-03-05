@@ -37,32 +37,36 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 
 type Booking = {
-  id: string
+  ref: string
   name: string
+  email: string
   contact: string
   date: string
   timeStart: string
   timeEnd: string
+  duration: string
   type: string
+  service: string
+  location: string
   status: string
 }
 
 const allBookings: Booking[] = [
-  { id: "BK001", name: "Alice Johnson", contact: "+639171234567", date: "2026-02-27", timeStart: "09:00 AM", timeEnd: "10:00 AM", type: "Appointment", status: "Completed" },
-  { id: "BK002", name: "Bob Smith", contact: "+639282345678", date: "2026-02-27", timeStart: "11:30 AM", timeEnd: "12:30 PM", type: "Reservation", status: "Pending" },
-  { id: "BK003", name: "Carol White", contact: "+639393456789", date: "2026-02-28", timeStart: "02:00 PM", timeEnd: "03:00 PM", type: "Appointment", status: "Completed" },
-  { id: "BK004", name: "David Lee", contact: "+639154567890", date: "2026-03-01", timeStart: "10:00 AM", timeEnd: "11:00 AM", type: "Reservation", status: "Pending" },
-  { id: "BK005", name: "Eva Martinez", contact: "+639265678901", date: "2026-03-02", timeStart: "03:30 PM", timeEnd: "04:30 PM", type: "Appointment", status: "Canceled" },
-  { id: "BK006", name: "Franco Reyes", contact: "+639176789012", date: "2026-03-03", timeStart: "08:00 AM", timeEnd: "09:00 AM", type: "Reservation", status: "Completed" },
-  { id: "BK007", name: "Grace Santos", contact: "+639287890123", date: "2026-03-03", timeStart: "01:00 PM", timeEnd: "02:00 PM", type: "Appointment", status: "Pending" },
-  { id: "BK008", name: "Henry Cruz", contact: "+639398901234", date: "2026-03-04", timeStart: "10:30 AM", timeEnd: "11:30 AM", type: "Reservation", status: "Completed" },
-  { id: "BK009", name: "Isabel Flores", contact: "+639159012345", date: "2026-03-04", timeStart: "02:30 PM", timeEnd: "03:30 PM", type: "Appointment", status: "Canceled" },
-  { id: "BK010", name: "Jose Dela Cruz", contact: "+639260123456", date: "2026-03-05", timeStart: "09:00 AM", timeEnd: "10:00 AM", type: "Reservation", status: "Pending" },
-  { id: "BK011", name: "Karen Mendoza", contact: "+639171234568", date: "2026-03-05", timeStart: "11:00 AM", timeEnd: "12:00 PM", type: "Appointment", status: "Completed" },
-  { id: "BK012", name: "Luis Garcia", contact: "+639282345679", date: "2026-03-06", timeStart: "03:00 PM", timeEnd: "04:00 PM", type: "Reservation", status: "Pending" },
-  { id: "BK013", name: "Maria Torres", contact: "+639393456780", date: "2026-03-07", timeStart: "08:30 AM", timeEnd: "09:30 AM", type: "Appointment", status: "Completed" },
-  { id: "BK014", name: "Nathan Aquino", contact: "+639154567891", date: "2026-03-07", timeStart: "01:30 PM", timeEnd: "02:30 PM", type: "Reservation", status: "Canceled" },
-  { id: "BK015", name: "Olivia Ramos", contact: "+639265678902", date: "2026-03-08", timeStart: "10:00 AM", timeEnd: "11:00 AM", type: "Appointment", status: "Pending" },
+  { ref: "BNG-A1B2C3D4", name: "Alice Johnson", email: "alice@example.com", contact: "+639171234567", date: "2026-02-27", timeStart: "09:00 AM", timeEnd: "10:00 AM", duration: "1 hour", type: "Appointment", service: "Check-up", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-E5F6G7H8", name: "Bob Smith", email: "bob@example.com", contact: "+639282345678", date: "2026-02-27", timeStart: "11:00 AM", timeEnd: "01:00 PM", duration: "2 hours", type: "Reservation", service: "Conference Hall", location: "Main Branch", status: "Pending" },
+  { ref: "BNG-I9J0K1L2", name: "Carol White", email: "carol@example.com", contact: "+639393456789", date: "2026-02-28", timeStart: "02:00 PM", timeEnd: "03:00 PM", duration: "1 hour", type: "Appointment", service: "Consultation", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-M3N4O5P6", name: "David Lee", email: "david@example.com", contact: "+639154567890", date: "2026-03-01", timeStart: "10:00 AM", timeEnd: "12:00 PM", duration: "2 hours", type: "Reservation", service: "Event Place", location: "Main Branch", status: "Pending" },
+  { ref: "BNG-Q7R8S9T0", name: "Eva Martinez", email: "eva@example.com", contact: "+639265678901", date: "2026-03-02", timeStart: "03:00 PM", timeEnd: "04:00 PM", duration: "1 hour", type: "Appointment", service: "Follow-up", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-U1V2W3X4", name: "Franco Reyes", email: "franco@example.com", contact: "+639176789012", date: "2026-03-03", timeStart: "08:00 AM", timeEnd: "09:00 AM", duration: "1 hour", type: "Reservation", service: "Room", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-Y5Z6A7B8", name: "Grace Santos", email: "grace@example.com", contact: "+639287890123", date: "2026-03-03", timeStart: "01:00 PM", timeEnd: "02:00 PM", duration: "1 hour", type: "Appointment", service: "Meeting", location: "Main Branch", status: "Pending" },
+  { ref: "BNG-C9D0E1F2", name: "Henry Cruz", email: "henry@example.com", contact: "+639398901234", date: "2026-03-04", timeStart: "10:00 AM", timeEnd: "11:00 AM", duration: "1 hour", type: "Reservation", service: "Table", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-G3H4I5J6", name: "Isabel Flores", email: "isabel@example.com", contact: "+639159012345", date: "2026-03-04", timeStart: "02:00 PM", timeEnd: "03:00 PM", duration: "1 hour", type: "Appointment", service: "Check-up", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-K7L8M9N0", name: "Jose Dela Cruz", email: "jose@example.com", contact: "+639260123456", date: "2026-03-05", timeStart: "09:00 AM", timeEnd: "11:00 AM", duration: "2 hours", type: "Reservation", service: "Conference Hall", location: "Main Branch", status: "Pending" },
+  { ref: "BNG-O1P2Q3R4", name: "Karen Mendoza", email: "karen@example.com", contact: "+639171234568", date: "2026-03-05", timeStart: "11:00 AM", timeEnd: "12:00 PM", duration: "1 hour", type: "Appointment", service: "Consultation", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-S5T6U7V8", name: "Luis Garcia", email: "luis@example.com", contact: "+639282345679", date: "2026-03-06", timeStart: "03:00 PM", timeEnd: "05:00 PM", duration: "2 hours", type: "Reservation", service: "Event Place", location: "Main Branch", status: "Pending" },
+  { ref: "BNG-W9X0Y1Z2", name: "Maria Torres", email: "maria@example.com", contact: "+639393456780", date: "2026-03-07", timeStart: "08:00 AM", timeEnd: "09:00 AM", duration: "1 hour", type: "Appointment", service: "Follow-up", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-A3B4C5D6", name: "Nathan Aquino", email: "nathan@example.com", contact: "+639154567891", date: "2026-03-07", timeStart: "01:00 PM", timeEnd: "03:00 PM", duration: "2 hours", type: "Reservation", service: "Room", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-E7F8G9H0", name: "Olivia Ramos", email: "olivia@example.com", contact: "+639265678902", date: "2026-03-08", timeStart: "10:00 AM", timeEnd: "11:00 AM", duration: "1 hour", type: "Appointment", service: "Meeting", location: "Main Branch", status: "Pending" },
 ]
 
 const upcomingBookings = allBookings
@@ -94,9 +98,9 @@ const columns: ColumnDef<Booking>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
-    header: "Booking ID",
-    cell: ({ row }) => <span className="font-mono text-xs text-muted-foreground">{row.getValue("id")}</span>,
+    accessorKey: "ref",
+    header: "Booking Ref",
+    cell: ({ row }) => <span className="font-mono text-xs text-muted-foreground">{row.getValue("ref")}</span>,
   },
   {
     accessorKey: "name",
@@ -108,8 +112,13 @@ const columns: ColumnDef<Booking>[] = [
     cell: ({ row }) => <span className="font-medium">{row.getValue("name")}</span>,
   },
   {
+    accessorKey: "email",
+    header: "Email",
+    cell: ({ row }) => <span className="text-sm text-muted-foreground">{row.getValue("email")}</span>,
+  },
+  {
     accessorKey: "contact",
-    header: "Contact",
+    header: "Phone",
   },
   {
     accessorKey: "date",
@@ -122,7 +131,11 @@ const columns: ColumnDef<Booking>[] = [
   {
     id: "time",
     header: "Time",
-    cell: ({ row }) => `${row.original.timeStart} - ${row.original.timeEnd}`,
+    cell: ({ row }) => `${row.original.timeStart} – ${row.original.timeEnd}`,
+  },
+  {
+    accessorKey: "duration",
+    header: "Duration",
   },
   {
     accessorKey: "type",
@@ -131,6 +144,15 @@ const columns: ColumnDef<Booking>[] = [
         Type <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
+  },
+  {
+    accessorKey: "service",
+    header: "Service",
+    cell: ({ row }) => <span className="text-sm">{row.getValue("service")}</span>,
+  },
+  {
+    accessorKey: "location",
+    header: "Location",
   },
   {
     accessorKey: "status",

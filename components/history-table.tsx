@@ -37,151 +37,34 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 type HistoryBooking = {
-  id: string
+  ref: string
   business: string
   date: string
   timeStart: string
   timeEnd: string
+  duration: string
   type: string
+  service: string
+  location: string
   status: string
 }
 
 const history: HistoryBooking[] = [
-  {
-    id: "BK001",
-    business: "John's Barbershop",
-    date: "2026-01-05",
-    timeStart: "09:00 AM",
-    timeEnd: "10:00 AM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK002",
-    business: "Jane's Salon",
-    date: "2026-01-12",
-    timeStart: "11:30 AM",
-    timeEnd: "12:00 PM",
-    type: "Appointment",
-    status: "Canceled",
-  },
-  {
-    id: "BK003",
-    business: "John's Barbershop",
-    date: "2026-01-20",
-    timeStart: "02:00 PM",
-    timeEnd: "04:00 PM",
-    type: "Reservation",
-    status: "Completed",
-  },
-  {
-    id: "BK004",
-    business: "Jane's Salon",
-    date: "2026-02-03",
-    timeStart: "10:00 AM",
-    timeEnd: "11:00 AM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK005",
-    business: "John's Barbershop",
-    date: "2026-02-15",
-    timeStart: "03:30 PM",
-    timeEnd: "04:30 PM",
-    type: "Reservation",
-    status: "Canceled",
-  },
-  {
-    id: "BK006",
-    business: "Jane's Salon",
-    date: "2026-02-28",
-    timeStart: "08:00 AM",
-    timeEnd: "08:30 AM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK007",
-    business: "John's Barbershop",
-    date: "2026-03-01",
-    timeStart: "10:00 AM",
-    timeEnd: "11:00 AM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK008",
-    business: "Glow Spa",
-    date: "2026-03-02",
-    timeStart: "01:00 PM",
-    timeEnd: "02:30 PM",
-    type: "Reservation",
-    status: "Canceled",
-  },
-  {
-    id: "BK009",
-    business: "Jane's Salon",
-    date: "2026-03-03",
-    timeStart: "03:00 PM",
-    timeEnd: "04:00 PM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK010",
-    business: "Glow Spa",
-    date: "2026-03-04",
-    timeStart: "09:30 AM",
-    timeEnd: "10:30 AM",
-    type: "Reservation",
-    status: "Completed",
-  },
-  {
-    id: "BK011",
-    business: "John's Barbershop",
-    date: "2026-03-05",
-    timeStart: "11:00 AM",
-    timeEnd: "12:00 PM",
-    type: "Appointment",
-    status: "Canceled",
-  },
-  {
-    id: "BK012",
-    business: "Glow Spa",
-    date: "2026-03-06",
-    timeStart: "02:00 PM",
-    timeEnd: "03:30 PM",
-    type: "Reservation",
-    status: "Completed",
-  },
-  {
-    id: "BK013",
-    business: "Jane's Salon",
-    date: "2026-03-07",
-    timeStart: "10:00 AM",
-    timeEnd: "11:00 AM",
-    type: "Appointment",
-    status: "Completed",
-  },
-  {
-    id: "BK014",
-    business: "John's Barbershop",
-    date: "2026-03-08",
-    timeStart: "08:30 AM",
-    timeEnd: "09:30 AM",
-    type: "Appointment",
-    status: "Canceled",
-  },
-  {
-    id: "BK015",
-    business: "Glow Spa",
-    date: "2026-03-09",
-    timeStart: "04:00 PM",
-    timeEnd: "05:00 PM",
-    type: "Reservation",
-    status: "Completed",
-  },
+  { ref: "BNG-A1B2C3D4", business: "John's Barbershop", date: "2026-01-05", timeStart: "09:00 AM", timeEnd: "10:00 AM", duration: "1 hour", type: "Appointment", service: "Haircut", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-E5F6G7H8", business: "Jane's Salon", date: "2026-01-12", timeStart: "11:30 AM", timeEnd: "12:30 PM", duration: "1 hour", type: "Appointment", service: "Consultation", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-I9J0K1L2", business: "John's Barbershop", date: "2026-01-20", timeStart: "02:00 PM", timeEnd: "04:00 PM", duration: "2 hours", type: "Reservation", service: "Event Place", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-M3N4O5P6", business: "Jane's Salon", date: "2026-02-03", timeStart: "10:00 AM", timeEnd: "11:00 AM", duration: "1 hour", type: "Appointment", service: "Follow-up", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-Q7R8S9T0", business: "John's Barbershop", date: "2026-02-15", timeStart: "03:00 PM", timeEnd: "05:00 PM", duration: "2 hours", type: "Reservation", service: "Conference Hall", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-U1V2W3X4", business: "Jane's Salon", date: "2026-02-28", timeStart: "08:00 AM", timeEnd: "09:00 AM", duration: "1 hour", type: "Appointment", service: "Check-up", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-Y5Z6A7B8", business: "John's Barbershop", date: "2026-03-01", timeStart: "10:00 AM", timeEnd: "11:00 AM", duration: "1 hour", type: "Appointment", service: "Meeting", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-C9D0E1F2", business: "Glow Spa", date: "2026-03-02", timeStart: "01:00 PM", timeEnd: "03:00 PM", duration: "2 hours", type: "Reservation", service: "Room", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-G3H4I5J6", business: "Jane's Salon", date: "2026-03-03", timeStart: "03:00 PM", timeEnd: "04:00 PM", duration: "1 hour", type: "Appointment", service: "Consultation", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-K7L8M9N0", business: "Glow Spa", date: "2026-03-04", timeStart: "09:00 AM", timeEnd: "11:00 AM", duration: "2 hours", type: "Reservation", service: "Table", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-O1P2Q3R4", business: "John's Barbershop", date: "2026-03-05", timeStart: "11:00 AM", timeEnd: "12:00 PM", duration: "1 hour", type: "Appointment", service: "Follow-up", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-S5T6U7V8", business: "Glow Spa", date: "2026-03-06", timeStart: "02:00 PM", timeEnd: "04:00 PM", duration: "2 hours", type: "Reservation", service: "Event Place", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-W9X0Y1Z2", business: "Jane's Salon", date: "2026-03-07", timeStart: "10:00 AM", timeEnd: "11:00 AM", duration: "1 hour", type: "Appointment", service: "Check-up", location: "Main Branch", status: "Completed" },
+  { ref: "BNG-A3B4C5D6", business: "John's Barbershop", date: "2026-03-08", timeStart: "08:00 AM", timeEnd: "09:00 AM", duration: "1 hour", type: "Appointment", service: "Consultation", location: "Main Branch", status: "Canceled" },
+  { ref: "BNG-E7F8G9H0", business: "Glow Spa", date: "2026-03-09", timeStart: "04:00 PM", timeEnd: "05:00 PM", duration: "1 hour", type: "Reservation", service: "Room", location: "Main Branch", status: "Completed" },
 ].sort((a, b) => new Date(`${b.date} ${b.timeStart}`).getTime() - new Date(`${a.date} ${a.timeStart}`).getTime())
 
 const statusClass: Record<string, string> = {
@@ -191,9 +74,9 @@ const statusClass: Record<string, string> = {
 
 const columns: ColumnDef<HistoryBooking>[] = [
   {
-    accessorKey: "id",
-    header: "Booking ID",
-    cell: ({ row }) => <span className="font-mono text-xs text-muted-foreground">{row.getValue("id")}</span>,
+    accessorKey: "ref",
+    header: "Booking Ref",
+    cell: ({ row }) => <span className="font-mono text-xs text-muted-foreground">{row.getValue("ref")}</span>,
   },
   {
     accessorKey: "business",
@@ -215,7 +98,11 @@ const columns: ColumnDef<HistoryBooking>[] = [
   {
     id: "time",
     header: "Time",
-    cell: ({ row }) => `${row.original.timeStart} - ${row.original.timeEnd}`,
+    cell: ({ row }) => `${row.original.timeStart} – ${row.original.timeEnd}`,
+  },
+  {
+    accessorKey: "duration",
+    header: "Duration",
   },
   {
     accessorKey: "type",
@@ -224,6 +111,15 @@ const columns: ColumnDef<HistoryBooking>[] = [
         Type <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
+  },
+  {
+    accessorKey: "service",
+    header: "Service",
+    cell: ({ row }) => <span className="text-sm">{row.getValue("service")}</span>,
+  },
+  {
+    accessorKey: "location",
+    header: "Location",
   },
   {
     accessorKey: "status",
