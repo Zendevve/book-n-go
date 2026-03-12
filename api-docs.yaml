@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: Book-N-Go API
+  version: 1.0.0
+  description: |
+    REST API documentation for the Book-N-Go appointment scheduling system.
+
+    ## Authentication
+    Many endpoints require bearer token authentication.
+  contact:
+    name: Book-N-Go Engineering
+    email: api@bookngo.example.com
+servers:
+  - url: http://localhost:3000/api
+    description: Local Development Environment
+tags:
+  - name: Bookings
+    description: Endpoints for creating and viewing service bookings
+  - name: Users
+    description: User profile and authentication endpoints
+paths:
+  /bookings:
+    post:
+      tags:
+        - Bookings
+      summary: Create a newly scheduled booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingFormData'
+            example:
+              date: "2024-12-01T00:00:00Z"
+              startTime: "09:00"
+              endTime: "10:00"
+              bookingType: "In-Person"
+              service: "srv_plumbing"
+      responses:
+        '201':
+          description: Booking successfully recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '409':
+          description: Time slot conflict found
+  /bookings/availability:
+    get:
+      tags:
+        - Bookings
+      summary: Query availability calendar
+      description: Returns blocked-out dates and unavailable time slots for scheduling checking
+      responses:
+        '200':
+          description: Calendar availability rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityQuery'
+components:
+  schemas:
+    BookingFormData:
+      type: object
+      required:
+        - date
+        - startTime
+        - endTime
+        - bookingType
+        - service
+      properties:
+        date:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+        endTime:
+          type: string
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+        bookingType:
+          type: string
+          enum: [In-Person, Virtual, Home Service]
+        service:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        bookingType:
+          type: string
+        serviceId:
+          type: string
+        customerName:
+          type: string
+        status:
+          type: string
+          enum: [Confirmed, Pending, Cancelled]
+    AvailabilityQuery:
+      type: object
+      properties:
+        fullyBookedDates:
+          type: array
+          items:
+            type: string
+            format: date
+        bookedSlots:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
